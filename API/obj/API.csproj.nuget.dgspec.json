@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\sadete\\OneDrive\\Desktop\\Udemy\\UBT\\FeedbackSystem\\api\\API.csproj": {}
+    "c:\\Users\\sadete\\OneDrive\\Desktop\\Udemy\\UBT\\FeedbackSystem\\API\\API.csproj": {}
   },
   "projects": {
-    "C:\\Users\\sadete\\OneDrive\\Desktop\\Udemy\\UBT\\FeedbackSystem\\api\\API.csproj": {
+    "c:\\Users\\sadete\\OneDrive\\Desktop\\Udemy\\UBT\\FeedbackSystem\\API\\API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\sadete\\OneDrive\\Desktop\\Udemy\\UBT\\FeedbackSystem\\api\\API.csproj",
+        "projectUniqueName": "c:\\Users\\sadete\\OneDrive\\Desktop\\Udemy\\UBT\\FeedbackSystem\\API\\API.csproj",
         "projectName": "API",
-        "projectPath": "C:\\Users\\sadete\\OneDrive\\Desktop\\Udemy\\UBT\\FeedbackSystem\\api\\API.csproj",
+        "projectPath": "c:\\Users\\sadete\\OneDrive\\Desktop\\Udemy\\UBT\\FeedbackSystem\\API\\API.csproj",
         "packagesPath": "C:\\Users\\sadete\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\sadete\\OneDrive\\Desktop\\Udemy\\UBT\\FeedbackSystem\\api\\obj\\",
+        "outputPath": "c:\\Users\\sadete\\OneDrive\\Desktop\\Udemy\\UBT\\FeedbackSystem\\API\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -25,7 +25,6 @@
           "net6.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -44,6 +43,10 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[6.0.0, )"
+            },
             "Microsoft.EntityFrameworkCore.Design": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
