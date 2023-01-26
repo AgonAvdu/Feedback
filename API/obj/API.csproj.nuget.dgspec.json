@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "c:\\Users\\sadete\\OneDrive\\Desktop\\Udemy\\UBT\\FeedbackSystem\\API\\API.csproj": {}
+    "C:\\Users\\sadete\\OneDrive\\Desktop\\Udemy\\UBT\\FeedbackSystem\\api\\API.csproj": {}
   },
   "projects": {
-    "c:\\Users\\sadete\\OneDrive\\Desktop\\Udemy\\UBT\\FeedbackSystem\\API\\API.csproj": {
+    "C:\\Users\\sadete\\OneDrive\\Desktop\\Udemy\\UBT\\FeedbackSystem\\api\\API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Users\\sadete\\OneDrive\\Desktop\\Udemy\\UBT\\FeedbackSystem\\API\\API.csproj",
+        "projectUniqueName": "C:\\Users\\sadete\\OneDrive\\Desktop\\Udemy\\UBT\\FeedbackSystem\\api\\API.csproj",
         "projectName": "API",
-        "projectPath": "c:\\Users\\sadete\\OneDrive\\Desktop\\Udemy\\UBT\\FeedbackSystem\\API\\API.csproj",
+        "projectPath": "C:\\Users\\sadete\\OneDrive\\Desktop\\Udemy\\UBT\\FeedbackSystem\\api\\API.csproj",
         "packagesPath": "C:\\Users\\sadete\\.nuget\\packages\\",
-        "outputPath": "c:\\Users\\sadete\\OneDrive\\Desktop\\Udemy\\UBT\\FeedbackSystem\\API\\obj\\",
+        "outputPath": "C:\\Users\\sadete\\OneDrive\\Desktop\\Udemy\\UBT\\FeedbackSystem\\api\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -25,6 +25,7 @@
           "net6.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {

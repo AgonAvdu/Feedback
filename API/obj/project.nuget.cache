@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "x8lUgKTghrZv2c4y65VTwVxqDGlAUdyaZi9RMe2aodziDVg7rQb4m+LwtXDb1FTzvIOfSZl30mWeNZRtVxuMHA==",
+  "dgSpecHash": "41FeeqU1U7EVsGBkyEgb4/8+i3z/KDRDBp7V1WwaWW9uS0Ua3cy7eGQc5JjX1l1fws91GxB87cUM13OFMvhz3w==",
   "success": true,
-  "projectFilePath": "c:\\Users\\sadete\\OneDrive\\Desktop\\Udemy\\UBT\\FeedbackSystem\\API\\API.csproj",
+  "projectFilePath": "C:\\Users\\sadete\\OneDrive\\Desktop\\Udemy\\UBT\\FeedbackSystem\\api\\API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\sadete\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\sadete\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\6.0.0\\microsoft.aspnetcore.authentication.jwtbearer.6.0.0.nupkg.sha512",
