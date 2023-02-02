@@ -133,6 +133,8 @@ namespace API.Controllers
                 return NotFound();
             }
 
+            Console.WriteLine("ASFAS");
+
             var result = await _userManager.DeleteAsync(user);
 
             if (result.Succeeded)
