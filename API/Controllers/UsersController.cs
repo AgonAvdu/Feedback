@@ -30,42 +30,6 @@ namespace API.Controllers
             return Ok(users);
         }
 
-        [HttpPost("teacher/setSubjects")]
-
-        public async Task<ActionResult<AppUser>> SetSubjects(TeacherSubjectDto TeacherSubject)
-        {
-            var subjects = _context.Subjects.Where(s => TeacherSubject.Subjects.Contains(s.Id)).ToList();
-            if (!subjects.Any())
-                return BadRequest("Subjects not found");
-            var teacher = await _userManager.FindByIdAsync(TeacherSubject.TeacherId);
-            if (teacher == null)
-                return BadRequest("Teacher not found");
-            if (teacher != null)
-            {
-
-                List<TeacherSubject> list = new List<TeacherSubject> { };
-
-                foreach (var subject in subjects)
-                {
-                    list.Add(new TeacherSubject { Subject = subject });
-
-                }
-                if(list != null)
-                {
-                    var rowsToDelete = _context.TeacherSubjects.Where(x => x.TeacherId == TeacherSubject.TeacherId);
-                    _context.TeacherSubjects.RemoveRange(rowsToDelete);
-                    _context.SaveChanges();
-                    teacher.TeacherSubjects = null; // Maybe not needed
-                    teacher.TeacherSubjects = list;
-                }
-
-                await _context.SaveChangesAsync();
-            }
-
-            return teacher;
-
-        }
-
         [HttpPut]
         public async Task<ActionResult<AppUser>> UpdateUser([FromForm] UpdateUserDto updateUserDto)
         {
@@ -93,7 +57,7 @@ namespace API.Controllers
 
             var role = await _userManager.GetRolesAsync(user);
 
-            if (role[0] == "Teacher")
+            if (role.FirstOrDefault() == "Teacher")
             {
                 var subjects = _context.Subjects.Where(s => updateUserDto.SubjectIds.Contains(s.Id)).ToList();
 
@@ -133,7 +97,6 @@ namespace API.Controllers
                 return NotFound();
             }
 
-            Console.WriteLine("ASFAS");
 
             var result = await _userManager.DeleteAsync(user);
 

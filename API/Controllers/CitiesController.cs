@@ -17,7 +17,7 @@ namespace API.Controllers
             _context = context;
             _mapper = mapper;
         }
-
+        [Authorize(Roles = "Admin")]
         [HttpGet()]
         public async Task<ActionResult<List<City>>> GetCities()
         {

@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.ML;
 using Microsoft.OpenApi.Models;
 using System.Text;
 using System.Text.Json.Serialization;
@@ -51,6 +52,8 @@ internal class Program
                 }
             });
         });
+
+        
 
         var provider = builder.Services.BuildServiceProvider();
         var configuration = provider.GetRequiredService<IConfiguration>();

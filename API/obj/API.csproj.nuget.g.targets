@@ -2,5 +2,9 @@
 <Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ImportGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
     <Import Project="$(NuGetPackageRoot)microsoft.extensions.apidescription.server\3.0.0\build\Microsoft.Extensions.ApiDescription.Server.targets" Condition="Exists('$(NuGetPackageRoot)microsoft.extensions.apidescription.server\3.0.0\build\Microsoft.Extensions.ApiDescription.Server.targets')" />
+    <Import Project="$(NuGetPackageRoot)ikvm\8.2.1\buildTransitive\netstandard2.0\IKVM.targets" Condition="Exists('$(NuGetPackageRoot)ikvm\8.2.1\buildTransitive\netstandard2.0\IKVM.targets')" />
+    <Import Project="$(NuGetPackageRoot)simplenetnlp.models.sentiment\3.8.0\build\SimpleNetNlp.Models.Sentiment.targets" Condition="Exists('$(NuGetPackageRoot)simplenetnlp.models.sentiment\3.8.0\build\SimpleNetNlp.Models.Sentiment.targets')" />
+    <Import Project="$(NuGetPackageRoot)simplenetnlp\3.8.0\build\SimpleNetNlp.targets" Condition="Exists('$(NuGetPackageRoot)simplenetnlp\3.8.0\build\SimpleNetNlp.targets')" />
+    <Import Project="$(NuGetPackageRoot)microsoft.ml\1.5.2\build\netstandard2.0\Microsoft.ML.targets" Condition="Exists('$(NuGetPackageRoot)microsoft.ml\1.5.2\build\netstandard2.0\Microsoft.ML.targets')" />
   </ImportGroup>
 </Project>

@@ -49,7 +49,7 @@ namespace API.Controllers
 
 
 
-            if (role[0] == "Teacher")
+            if (role.FirstOrDefault() == "Teacher")
             {
 
                 var subjectTeachers = _context.TeacherSubjects.Include(st => st.Subject).Where(st => st.TeacherId == user.Id).ToList();
@@ -165,7 +165,7 @@ namespace API.Controllers
 
 
 
-            if (role[0] == "Teacher")
+            if (role.FirstOrDefault() == "Teacher")
             {
 
                 var subjectTeachers = _context.TeacherSubjects.Include(st => st.Subject).Where(st => st.TeacherId == user.Id).ToList();
