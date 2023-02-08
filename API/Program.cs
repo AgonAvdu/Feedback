@@ -104,6 +104,7 @@ internal class Program
         }
 
 
+        app.UseCors(options => options.AllowAnyMethod().AllowAnyHeader().AllowCredentials().WithOrigins("http://127.0.0.1:5173"));
 
         // Configure the HTTP request pipeline.
         if (app.Environment.IsDevelopment())

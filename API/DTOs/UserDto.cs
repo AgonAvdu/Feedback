@@ -8,10 +8,11 @@ namespace API.DTOs
         public string Name { get; set; }
         public string Surname { get; set; }
         public string Gender { get; set; }
-        public string DateOfBrith { get; set; }
+        public string DateOfBirth { get; set; }
         public string CreatedAt { get; set; }
         public string Email { get; set; }
         public string Token { get; set; }
+        public string Role { get; set; }
         public List<SubjectDto> Subjects { get; set; }
         public FacultyDto Faculty { get; set; }
 

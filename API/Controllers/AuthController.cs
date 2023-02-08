@@ -72,10 +72,12 @@ namespace API.Controllers
                     Surname = user.Surname,
                     Email = user.Email,
                     Gender = user.Gender,
-                    DateOfBrith = user.DateOfBirth,
+                    DateOfBirth = user.DateOfBirth,
                     CreatedAt = user.CreatedAt,
                     Token = await _tokenService.GenerateToken(user),
                     Subjects = teacherSubjects,
+                    Role = role.FirstOrDefault(),
+
                     Faculty = facultyData
 
                 };
@@ -88,8 +90,10 @@ namespace API.Controllers
                     Surname = user.Surname,
                     Email = user.Email,
                     Gender = user.Gender,
-                    DateOfBrith = user.DateOfBirth,
+                    DateOfBirth = user.DateOfBirth,
                     CreatedAt= user.CreatedAt,
+                    Role = role.FirstOrDefault(),
+
                     Token = await _tokenService.GenerateToken(user),
                     Faculty = facultyData
                 };
@@ -99,7 +103,7 @@ namespace API.Controllers
            
         }
 
-        [HttpPost("register/user")]
+        [HttpPost("register")]
 
         public async Task<ActionResult> RegisterUser([FromForm] RegisterUserDto registerDto)
         {
@@ -120,7 +124,7 @@ namespace API.Controllers
 
             var user = new AppUser
             {
-                UserName = registerDto.Username,
+                UserName = registerDto.Name.Substring(0, 1) + registerDto.Surname + DateTime.Now.Ticks.ToString().Substring(0, 4),
                 Name = registerDto.Name,
                 Surname = registerDto.Surname,
                 Email = registerDto.Email,
@@ -188,8 +192,9 @@ namespace API.Controllers
                     Surname = user.Surname,
                     Email = user.Email,
                     Gender = user.Gender,
-                    DateOfBrith = user.DateOfBirth,
+                    DateOfBirth = user.DateOfBirth,
                     CreatedAt = user.CreatedAt,
+                    Role = role.FirstOrDefault(),
                     Token = await _tokenService.GenerateToken(user),
                     Subjects = teacherSubjects,
                     Faculty = facultyData
@@ -205,8 +210,10 @@ namespace API.Controllers
                     Surname = user.Surname,
                     Email = user.Email,
                     Gender = user.Gender,
-                    DateOfBrith = user.DateOfBirth,
+                    DateOfBirth = user.DateOfBirth,
                     CreatedAt = user.CreatedAt,
+                    Role = role.FirstOrDefault(),
+
                     Token = await _tokenService.GenerateToken(user),
                     Faculty = facultyData
                 };

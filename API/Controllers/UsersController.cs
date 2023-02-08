@@ -30,7 +30,58 @@ namespace API.Controllers
             return Ok(users);
         }
 
-        [HttpPut]
+        // [Authorize(Roles = "Admin")]
+        [HttpGet("{id}", Name = "GetUser")]
+        public async Task<ActionResult<AppUser>> GetUser(string id)
+        {
+            return await _userManager.FindByIdAsync(id);
+        }
+
+        [HttpGet("{userId}/feedbacks")]
+        public async Task<ActionResult<IEnumerable<object>>> GetFeedbackByUser(string userId)
+        {
+            var user = await _userManager.FindByIdAsync(userId);
+
+
+            var roles = await _userManager.GetRolesAsync(user);
+            if (roles.FirstOrDefault() == "Teacher")
+            {
+                var feedbacks = await _context.Feedbacks
+                .Where(f => f.TeacherId == userId)
+                .Select(f => new AnonymousFeedbackDto
+                {
+                    Id = f.Id,
+                    Subject = f.Subject,
+                    Message = f.Message,
+                    SentimentScore = f.SentimentScore,
+                })
+                .ToListAsync();
+                return feedbacks;
+            }
+            else
+            {
+                var feedbacks = await _context.Feedbacks
+                .Where(f => f.StudentId == userId)
+                .Select(f => new FeedbackDto
+                {
+                    Id = f.Id,
+                    Student = f.Student,
+                    Teacher = f.Teacher,
+                    Subject = f.Subject,
+                    Message = f.Message,
+                    SentimentScore = f.SentimentScore,
+
+                })
+                .ToListAsync();
+                return feedbacks;
+            }
+
+
+
+        }
+
+
+            [HttpPut]
         public async Task<ActionResult<AppUser>> UpdateUser([FromForm] UpdateUserDto updateUserDto)
         {
             var user = await _userManager.FindByIdAsync(updateUserDto.Id);

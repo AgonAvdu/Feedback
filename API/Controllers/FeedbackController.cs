@@ -2,12 +2,10 @@
 using API.DTOs;
 using API.Entities;
 using AutoMapper;
-using com.sun.org.apache.xerces.@internal.impl.dv.xs;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.ML;
-using static edu.stanford.nlp.pipeline.CoreNLPProtos;
 
 namespace API.Controllers
 {
@@ -23,6 +21,50 @@ namespace API.Controllers
             _context = context;
             _mapper = mapper;
         }
+
+        [HttpGet("eedbacks")]
+        public async Task<ActionResult<List<FeedbackDto>>> GetFeedbacks()
+        {
+            var feedbacks = await _context.Feedbacks
+                .Select(f => new FeedbackDto
+                {
+                    Id = f.Id,
+                    Student = f.Student,
+                    Teacher = f.Teacher,
+                    Subject = f.Subject,
+                    Message = f.Message,
+                    SentimentScore = f.SentimentScore,
+                })
+                .ToListAsync();
+           
+            return feedbacks;
+        }
+        [HttpGet("anonymous-feedbacks")]
+        public async Task<ActionResult<List<AnonymousFeedbackDto>>> GetAnonymousFeedbacks()
+        {
+            var feedbacks = await _context.Feedbacks
+                .Select(f => new AnonymousFeedbackDto
+                {
+                    Id = f.Id,
+                    Subject = f.Subject,
+                    Message = f.Message,
+                    SentimentScore = f.SentimentScore,
+                })
+                .ToListAsync();
+                
+
+            return feedbacks;
+
+        }
+        
+
+            // [Authorize(Roles = "Admin")]
+            [HttpGet("{id}", Name = "GetFeedback")]
+        public async Task<ActionResult<Feedback>> GetFeedback(int id)
+        {
+            return await _context.Feedbacks.FindAsync(id);
+        }
+
 
         [HttpPost]
         public async Task<IActionResult> CreateFeedback([FromForm] CreateFeedbackDto feedbackDto)
@@ -58,35 +100,61 @@ namespace API.Controllers
             }
 
 
-            var context = new MLContext();
-
-            var data = context.Data.LoadFromTextFile<SentimentData>("stock_data.csv", hasHeader: true, separatorChar: ',', allowQuoting: true);
-
-            var pipeline = context.Transforms.Expression("Label", "(x) => x == 1 ? true : false", "Sentiment")
-                .Append(context.Transforms.Text.FeaturizeText("Features", nameof(SentimentData.Text)))
-                .Append(context.BinaryClassification.Trainers.SdcaLogisticRegression());
-
-            var model = pipeline.Fit(data);
-
-            var predictionEngine = context.Model.CreatePredictionEngine<SentimentData, SentimentPrediction>(model);
-
-            var prediction = predictionEngine.Predict(new SentimentData { Text = feedbackDto.Message });
-
-            var roundedScore = (float)Math.Round(prediction.Score, 2);
-
             var feedback = new Feedback
             {
                 Student = student,
                 Teacher = teacher,
                 Subject = subject,
                 Message = feedbackDto.Message,
-                SentimentScore = roundedScore,
             };
+            feedback.SetScore(feedbackDto.Message);
 
             _context.Feedbacks.Add(feedback);
             await _context.SaveChangesAsync();
 
-            return Ok();
+            return Ok(feedback);
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> UpdateFeedback([FromForm] UpdateFeedbackDto feedbackDto)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var feedback = await _context.Feedbacks.FirstOrDefaultAsync(f => f.Id == feedbackDto.Id);
+            if (feedback == null)
+            {
+                return BadRequest("Feedback not found");
+            }
+
+            feedback.Message= feedbackDto.Message;
+            feedback.SetScore(feedbackDto.Message);
+
+            var result = await _context.SaveChangesAsync() > 0;
+            if (result) return Ok(feedback);
+            return BadRequest(new ProblemDetails { Title = "Problem updating Feedback" });
+        }
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteFeedbacl([FromForm] int id)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var feedback = await _context.Feedbacks.FirstOrDefaultAsync(f => f.Id == id);
+            if (feedback == null)
+            {
+                return NotFound();
+            }
+
+
+            _context.Feedbacks.Remove(feedback);
+            var result = await _context.SaveChangesAsync() > 0;
+            if (result) return Ok();
+            return BadRequest(new ProblemDetails { Title = "Problem deleting Feedback" });
         }
 
         [HttpPost("TestSentiment")]
